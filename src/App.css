@@ -1,0 +1,45 @@
+.login{
+  margin-top: 6%;
+  margin-left: 20%;
+}
+GoogleLogin{
+  margin-left: 50px;
+}
+.facebook{
+  background-color: #2f55a4;
+  color: white;
+  border: 3px solid #2f55a4;
+  margin-top: 50px;
+}
+#input{
+  color: black;
+  font-size: 22px;
+  margin-top: 20px;
+}
+.user{
+  margin-left: 40%;
+  size: 50px;
+}
+#user{
+  cursor: pointer;
+}
+
+.checkbox{
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+#b{
+  font-size: 20px;
+}
+.del{
+  float: right;
+  cursor: pointer;
+  margin-left: 20px;
+  margin-top: 10px;
+}
+#foot{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
