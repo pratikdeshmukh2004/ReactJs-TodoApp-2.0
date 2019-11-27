@@ -17,8 +17,7 @@ GoogleLogin{
   margin-top: 20px;
 }
 .user{
-  margin-left: 40%;
-  size: 50px;
+  margin-left: 35%;
 }
 #user{
   cursor: pointer;
@@ -36,7 +35,6 @@ GoogleLogin{
   float: right;
   cursor: pointer;
   margin-left: 20px;
-  margin-top: 10px;
 }
 #foot{
   position: fixed;

@@ -16,7 +16,7 @@ class Signup extends Component {
         var pass=document.getElementById("passw").value;
         var retry=document.getElementById("passw2").value;
         if (user !=="" && email!=='' && pass!=='' && email.includes("@") && retry===pass){
-            axios.post('http://18.220.186.45:8090/createuser',{user:user,email:email,password:pass})
+            axios.post('http://localhost:8080/createuser',{user:user,email:email,password:pass})
             .then((data)=>{
                 if (data.data.result===false){
                     this.setState({
@@ -45,7 +45,7 @@ class Signup extends Component {
         
     }
     componentWillMount(){
-        axios.post("http://18.220.186.45:8090/all",{token:reactLocalStorage.get("token")})
+        axios.post("http://localhost:8080/all",{token:reactLocalStorage.get("token")})
             .then((resp)=>{
                 if (resp.data.result){
                     this.setState({
@@ -69,7 +69,7 @@ class Signup extends Component {
                     <MDBCardBody className="mx-5">
                     <div className="text-center">
                         <h3 className="dark-grey-text mb-3">
-                        <strong>Sign Up</strong>
+                        <strong>Sign in</strong>
                         </h3>
                     </div>
                     <p style={{color:"red"}}>{this.state.errortext}</p>
@@ -125,7 +125,7 @@ class Signup extends Component {
                     Have an Account?
                         <Link to="/login" className="blue-text ml-1">
 
-                        Sign In
+                        Log In
                         </Link>
                     </p>
                     </MDBModalFooter>

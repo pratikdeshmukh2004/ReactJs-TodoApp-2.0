@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
-import { MDBCard, MDBCardBody, MDBInput, MDBIcon } from "mdbreact";
+import axios from 'axios';
+import { reactLocalStorage } from 'reactjs-localstorage';
+import { Redirect } from 'react-router';
+import { MDBCard, MDBCardBody, MDBInput, MDBContainer, MDBFooter, MDBIcon } from "mdbreact";
 
 class Data extends Component {
     constructor(props) {
@@ -11,7 +14,18 @@ class Data extends Component {
     }
     componentWillMount() {
         this.props.handlereload()
-        
+        axios.post("http://localhost:8080/all", ({ token: reactLocalStorage.get("token") }))
+            .then((resp) => {
+                if (resp.data.result) {
+                    this.setState({
+                        redirect: <Redirect to="/home" />
+                    })
+                } else {
+                    this.setState({
+                        redirect: <Redirect to="/login" />
+                    })
+                }
+            })
     }
     onchengehandular = (e) => {
         this.setState({
@@ -67,14 +81,14 @@ class Data extends Component {
                                 <MDBCardBody id={item.id} onDoubleClick={this.ondouble} title="Press Enter To Save...">
                                     <input type="checkbox" id={item.id} className="checkbox" title="Done To Do" onClick={this.oncheck} checked={item.done} />
                                     <MDBInput value={this.state.edit} id="input" onKeyPress={this.onEnter} onChange={this.onchengehandular} hint="Edit New To Do..." className="mx-auto white-text" />
-                                    <MDBIcon size="2x" onClick={this.ondelete} icon="trash" id={item.id} title="Delete" className="del" />
+                                    <MDBIcon onClick={this.ondelete} icon="trash" id={item.id} title="Delete" className="del" />
                                 </MDBCardBody>
                             </MDBCard>)
                         } else {
                             return (<MDBCard key={index} className="mt-3 success-color white-text">
                                 <MDBCardBody id={item.id} onDoubleClick={this.ondouble} title="Double Click To Edit...">
                                     <input type="checkbox" id={item.id} className="checkbox" title="Done To Do" onClick={this.oncheck} checked={item.done} />
-                                    <b id="b" className="p-5">{item.text}<MDBIcon size="2x" onClick={this.ondelete} icon="trash" id={item.id} title="Edit" className="del" /><MDBIcon size="2x" onClick={this.ondouble} title="Delete" icon="edit" id={item.id} className="del" />
+                                    <b id="b" className="p-5">{item.text}<MDBIcon onClick={this.ondouble} icon="edit" id={item.id} title="Edit" className="del" /><MDBIcon onClick={this.ondelete} title="Delete" icon="trash" id={item.id} className="del" />
                                     </b></MDBCardBody>
                             </MDBCard>
                             )

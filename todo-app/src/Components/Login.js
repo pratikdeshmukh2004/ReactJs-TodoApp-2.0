@@ -4,6 +4,9 @@ import axios from 'axios';
 import {reactLocalStorage} from 'reactjs-localstorage';
 import { GoogleLogin } from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import "bootstrap-css-only/css/bootstrap.min.css";
+import "mdbreact/dist/css/mdb.css";
 import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBInput, MDBBtn, MDBIcon, MDBModalFooter } from 'mdbreact';
 
 class Login extends Component {
@@ -15,7 +18,7 @@ class Login extends Component {
         var email=document.getElementById("email").value;
         var pass=document.getElementById("pass").value;
         if (email!=='' && pass!=='' && email.includes("@")){
-            axios.post("http://18.220.186.45:8090/checkuser",{email:email,password:pass})
+            axios.post("http://localhost:8080/checkuser",{email:email,password:pass})
             .then((data)=>{
                 if(data.data.result && data.data.pass===pass){  
                     reactLocalStorage.clear()
@@ -42,7 +45,7 @@ class Login extends Component {
         }  
     }
     componentWillMount(){
-        axios.post("http://18.220.186.45:8090/all",{token:reactLocalStorage.get("token")})
+        axios.post("http://localhost:8080/all",{token:reactLocalStorage.get("token")})
             .then((resp)=>{
                 if (resp.data.result){
                     this.setState({
@@ -61,7 +64,7 @@ class Login extends Component {
             "email":result.profileObj.email,
             "password":null
         }
-        axios.post("http://18.220.186.45:8090/fbgoogle",userdetail)
+        axios.post("http://localhost:8080/fbgoogle",userdetail)
         .then((res)=>{
             reactLocalStorage.set("token",res.data.token)
             this.setState({
@@ -79,7 +82,7 @@ class Login extends Component {
             "email":result.id,
             "password":null
         }
-        axios.post("http://18.220.186.45:8090/fbgoogle",userdetail)
+        axios.post("http://localhost:8080/fbgoogle",userdetail)
         .then((res)=>{
             reactLocalStorage.set("token",res.data.token)
             this.setState({

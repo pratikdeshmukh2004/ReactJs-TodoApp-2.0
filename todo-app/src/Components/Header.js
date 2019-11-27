@@ -3,9 +3,9 @@ import { Pie } from "react-chartjs-2";
 import { reactLocalStorage } from 'reactjs-localstorage';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { MDBBadge, MDBNavbarNav, MDBNavbar, MDBNavLink, MDBNavbarBrand, MDBCollapse, MDBIcon, MDBInput, MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBAvatar } from "mdbreact";
+import { MDBBadge,MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBIcon, MDBInput, MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter, MDBAvatar } from "mdbreact";
 import { Fragment } from "react";
-import { Navbar, Nav, Form, FormControl, Button, Modal } from 'react-bootstrap';
+import { Navbar, Nav,Form,FormControl,Button,Modal } from 'react-bootstrap';
 class Head extends React.Component {
     state = ({
         item: "",
@@ -62,7 +62,7 @@ class Head extends React.Component {
     componentWillMount = () => {
         console.log(this.props.statedata);
 
-        axios.post("http://18.220.186.45:8090/getuser", { token: reactLocalStorage.get("token") })
+        axios.post("http://localhost:8080/getuser", { token: reactLocalStorage.get("token") })
             .then((data) => {
                 if (data.data.result) {
 
@@ -83,36 +83,36 @@ class Head extends React.Component {
 
         return (
             <div>
-                <MDBNavbar color="default-color" dark expand="md">
-                    <MDBNavbarBrand>
+                <Navbar fixed="top" bg="danger" expand="lg">
+                    <Navbar.Brand href="#home">
                         <strong className="white-text"><b>To Do</b></strong>
-                    </MDBNavbarBrand>
+                    </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mr-auto">
-                            <Nav.Link title="Total Todos" href="#">
-                                <MDBNavLink className="white-text" onClick={this.onchangec} id="1" to="#"><MDBIcon icon="home" /> Home <MDBBadge color="success" >{this.props.totaltodo}</MDBBadge></MDBNavLink>
+                            <Nav.Link href="#home">
+                                <MDBNavLink onClick={this.onchangec} id="1" to="#home"><MDBIcon icon="home" /> Home <MDBBadge color="success" >{this.props.totaltodo}</MDBBadge></MDBNavLink>
                             </Nav.Link>
-                            <Nav.Link title="Pending Todos" href="#">
-                                <MDBNavLink className="white-text" onClick={this.onchangec} id="2" to="#"><MDBIcon  icon="square" /> Pendding <MDBBadge color="success" >{this.props.pentodo}</MDBBadge></MDBNavLink>
+                            <Nav.Link href="#pending">
+                                <MDBNavLink onClick={this.onchangec} id="2" to="#pending"><MDBIcon icon="square" /> Pendding <MDBBadge color="success" >{this.props.pentodo}</MDBBadge></MDBNavLink>
                             </Nav.Link>
-                            <Nav.Link title="Done Todods" href="#">
-                                <MDBNavLink className="white-text" onClick={this.onchangec} id="3" to="#"><MDBIcon icon="check-square" /> Done <MDBBadge color="success" >{this.props.donetodo}</MDBBadge></MDBNavLink>
+                            <Nav.Link href="#home">
+                                <MDBNavLink onClick={this.onchangec} id="3" to="#done"><MDBIcon icon="check-square" /> Done <MDBBadge color="success" >{this.props.donetodo}</MDBBadge></MDBNavLink>
                             </Nav.Link>
                         </Nav>
                         <Nav><MDBNavbarNav id="user" right>
                             <MDBIcon onClick={this.toggle} size="2x" className="white-text" icon="user-circle" />
                         </MDBNavbarNav></Nav>
                     </Navbar.Collapse>
-                </MDBNavbar>
-                <br /><br />
+                </Navbar>
+                <br/><br/>
                 <MDBInput value={this.state.item} onKeyPress={this.onEnter} onChange={this.onChangeHandler} hint="Add New To Do..." id="input" className="mx-auto w-responsive mt-5" />
 
                 <MDBContainer>
                     <Modal show={this.state.open} onHide={this.toggleCollapse}>
                         <MDBModalHeader className="danger-color" toggle={this.toggle}>Profile</MDBModalHeader>
                         <MDBModalBody>
-                            <MDBIcon size="5x" className=" danger-text user" icon="user-secret" />
+                            <MDBIcon size="8x" className="user" icon="user-secret" />
                             <h3 className="text-center text-uppercase"><b>{this.state.user}</b></h3>
                             <p className="text-center blue-text">{this.state.email}</p>
                             <MDBContainer>
