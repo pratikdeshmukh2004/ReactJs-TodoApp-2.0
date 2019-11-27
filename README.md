@@ -13,7 +13,7 @@ git clone https://github.com/Pratiknavgurukul/ReactJs-TodoApp-2.0.git
 Install Packages.
 
 ```bash
-cd ReactJs-TodoApp-2.0/cd todo-app
+cd ReactJs-TodoApp-2.0/todo-app
 
 sudo npm i
 ```
