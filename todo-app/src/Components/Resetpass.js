@@ -20,7 +20,7 @@ export class Reset extends Component {
 
 
     componentWillMount() {
-        axios.post("http://localhost:8080/getuser", { token: (window.location.search).slice(1) })
+        axios.post("http://localhost:8090/getuser", { token: (window.location.search).slice(1) })
             .then((resp) => {
                 if (!resp.data.result) {
                     this.setState({
@@ -50,7 +50,7 @@ export class Reset extends Component {
                         errortext:"Please Check Your Confirm Password..."
                     })
             }else{
-                axios.post("http://localhost:8080/resetpass", { token: (window.location.search).slice(1),password:pass})
+                axios.post("http://localhost:8090/resetpass", { token: (window.location.search).slice(1),password:pass})
                 .then((resp) => {
                     if (resp.data.result){
                         this.setState({

@@ -17,8 +17,8 @@ class Login extends Component {
     onlogin=()=>{
         var email=document.getElementById("email").value;
         var pass=document.getElementById("pass").value;
-        if (email!=='' && pass!=='' && email.includes("@")){
-            axios.post("http://localhost:8080/checkuser",{email:email,password:pass})
+        if (email!=='' && pass!=='' && email.includes("@")){          
+            axios.post("http://localhost:8090/checkuser",{email:email,password:pass})
             .then((data)=>{
                 if(data.data.result && data.data.pass===pass){  
                     reactLocalStorage.clear()
@@ -45,7 +45,7 @@ class Login extends Component {
         }  
     }
     componentWillMount(){
-        axios.post("http://localhost:8080/all",{token:reactLocalStorage.get("token")})
+        axios.post("http://localhost:8090/all",{token:reactLocalStorage.get("token")})
             .then((resp)=>{
                 if (resp.data.result){
                     this.setState({
@@ -59,12 +59,14 @@ class Login extends Component {
             })
     }
     responseGoogle=(result)=>{
+      console.log(result);
+      
         var userdetail={
             "user":result.profileObj.name,
             "email":result.profileObj.email,
             "password":null
         }
-        axios.post("http://localhost:8080/fbgoogle",userdetail)
+        axios.post("http://localhost:8090/fbgoogle",userdetail)
         .then((res)=>{
             reactLocalStorage.set("token",res.data.token)
             this.setState({
@@ -82,7 +84,7 @@ class Login extends Component {
             "email":result.id,
             "password":null
         }
-        axios.post("http://localhost:8080/fbgoogle",userdetail)
+        axios.post("http://localhost:8090/fbgoogle",userdetail)
         .then((res)=>{
             reactLocalStorage.set("token",res.data.token)
             this.setState({

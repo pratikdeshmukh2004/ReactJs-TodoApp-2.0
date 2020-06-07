@@ -12,7 +12,7 @@ export class Forgotpass extends Component {
         alert:false
     }
     componentWillMount(){
-        axios.post("http://localhost:8080/all",{token:reactLocalStorage.get("token")})
+        axios.post("http://localhost:8090/all",{token:reactLocalStorage.get("token")})
             .then((resp)=>{
                 if (resp.data.result){
                     this.setState({
@@ -26,7 +26,7 @@ export class Forgotpass extends Component {
             })
     }
     onForget=()=>{
-        axios.post("http://localhost:8080/forgetpass",({email:document.getElementById("email").value}))
+        axios.post("http://localhost:8090/forgetpass",({email:document.getElementById("email").value}))
         .then((data)=>{
             if (data.data.result){
                 this.setState({

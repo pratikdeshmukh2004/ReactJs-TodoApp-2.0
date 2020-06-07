@@ -14,7 +14,7 @@ class Data extends Component {
     }
     componentWillMount() {
         this.props.handlereload()
-        axios.post("http://localhost:8080/all", ({ token: reactLocalStorage.get("token") }))
+        axios.post("http://localhost:8090/all", ({ token: reactLocalStorage.get("token") }))
             .then((resp) => {
                 if (resp.data.result) {
                     this.setState({

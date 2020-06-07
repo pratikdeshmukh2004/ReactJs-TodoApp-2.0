@@ -16,7 +16,7 @@ class Signup extends Component {
         var pass=document.getElementById("passw").value;
         var retry=document.getElementById("passw2").value;
         if (user !=="" && email!=='' && pass!=='' && email.includes("@") && retry===pass){
-            axios.post('http://localhost:8080/createuser',{user:user,email:email,password:pass})
+            axios.post('http://localhost:8090/createuser',{user:user,email:email,password:pass})
             .then((data)=>{
                 if (data.data.result===false){
                     this.setState({
@@ -45,7 +45,7 @@ class Signup extends Component {
         
     }
     componentWillMount(){
-        axios.post("http://localhost:8080/all",{token:reactLocalStorage.get("token")})
+        axios.post("http://localhost:8090/all",{token:reactLocalStorage.get("token")})
             .then((resp)=>{
                 if (resp.data.result){
                     this.setState({

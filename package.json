@@ -1,13 +1,13 @@
 {
   "name": "to-do-app",
   "version": "1.0.0",
-  "homepage":" https://pratiknavgurukul.github.io/To-Do-Frontend/",
+  "homepage": " https://pratiknavgurukul.github.io/To-Do-Frontend/",
   "description": "",
   "main": "todoserver.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "predeploy":"npm run build",
-    "deploy":"react-scripts eject"
+    "predeploy": "npm run build",
+    "deploy": "react-scripts eject"
   },
   "author": "",
   "license": "ISC",

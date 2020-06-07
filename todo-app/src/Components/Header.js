@@ -60,13 +60,11 @@ class Head extends React.Component {
 
     }
     componentWillMount = () => {
-        console.log(this.props.statedata);
-
-        axios.post("http://localhost:8080/getuser", { token: reactLocalStorage.get("token") })
+        axios.post("http://localhost:8090/getuser", { token: reactLocalStorage.get("token") })
             .then((data) => {
                 if (data.data.result) {
-
-
+                    console.log(data);
+                    
                     this.setState({
                         user: data.data.data.user,
                         email: data.data.data.email

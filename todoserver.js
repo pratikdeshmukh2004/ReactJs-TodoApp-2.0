@@ -160,13 +160,13 @@ app.post("/getuser", (req, res) => {
     
     jwt.verify(req.body.token, "lala", (err, tokendata) => {        
         if (!err) {
-            console.log(tokendata);
-            
             knex.select("*").from("users").where("id", tokendata.id)
                 .then((data) => {
-                    console.log(tokendata);
-
+                    if (data.data.length>0){
                     res.send({ result: true, data: data[0] })
+                    }else{
+                        res.send({ result: false })
+                    }
                 })
         } else {
             res.send({ result: false })
@@ -193,6 +193,8 @@ app.post("/fbgoogle", (req, res) => {
 })
 
 app.post('/forgetpass', (req, res) => {
+    console.log(req.body);
+    
     knex.select("*").from("users").where('email', req.body.email)
         .then((result) => {
             if (result.length > 0) {
@@ -206,13 +208,14 @@ app.post('/forgetpass', (req, res) => {
                 });
 
                 var mailOptions = {
-                    from: 'pratik18@navgurukul.org',
+                    from: 'ToDo',
                     to: req.body.email,
                     subject: 'Reset Password Of Todo App.',
-                    text: 'http://localhost:8080/forgetpass?' + token,
+                    text: 'http://localhost:8090/forgetpass?' + token,
                     html: '<center><div style="background-color: #e5e5e5;width: 50%;padding: 30px;"><h1 style="color: green;text-align: center;">Reset Password</h1><p>Seems like you forgot your password for Todo app If this is true,click below to reset your password.This is Valid For 1 Hour.</p><a href="http://localhost:3000/resetpass?' + token + '" style="background-color: blue; color: white;border: none;padding: 5px;font-size: 20px; text-decoration: none;">Reset Password</a><p>If you did not forgot your password you can safly ignore this mail.</p><p style="text-align: left;">Thank you</p></div></center>'
                 };
-
+                console.log(mailOptions);
+                
                 transporter.sendMail(mailOptions, (error, info) => {
                     if (error) {
                         console.log(error);
@@ -243,4 +246,4 @@ app.post('/resetpass',(req,res)=>{
     
 })
 
-app.listen(8080)
+app.listen(8090)
